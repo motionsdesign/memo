@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Full‑Page Background Video with Typing Heading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Montserrat font for "me.mo" style -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .video-bg video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100vw;
+      min-height: 100vh;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    /* Typing heading styles */
+    .hero-title {
+      position: absolute;
+      top: 40%;          /* Adjust vertically as needed */
+      left: 62%;         /* Adjust horizontally to the right of the balloon */
+      transform: translate(-50%, -50%);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 1200;
+      font-size: 3.5vw;  /* Responsive size */
+      color: #191919;    /* "me.mo" word color */
+      white-space: wrap;
+      z-index: 10;
+      text-shadow: 1px 2px 12px rgba(255,255,255,0.8);
+      letter-spacing: 0.02em;
+      user-select: none;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .hero-title {
+        font-size: 5vw;
+        top: 45%;
+        left: 60%;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 6vw;
+        top: 47%;
+        left: 54%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background video -->
+  <div class="video-bg">
+    <video autoplay muted playsinline preload="auto" onended="this.pause(); this.currentTime = this.duration - 0.05;">
+      <source src="https://raw.githubusercontent.com/motionsdesign/memo/main/air_balloon1_1499083_original_mp4.webm" type="video/webm">
+      <!-- Fallback MP4 can be added here -->
+      Your browser does not support HTML5 video.
+    </video>
+  </div>
+
+  <!-- Typing animated heading -->
+  <h1 id="hero-title" class="hero-title">El futuro inmobiliario es digital. Súmate con holamemo.</h1>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const heroTitle = document.getElementById('hero-title');
+      const text = heroTitle.textContent;
+      heroTitle.textContent = '';
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          heroTitle.textContent += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 70);
+        }
+      }
+      setTimeout(typeWriter, 500); // Start delay
+    });
+  </script>
+
+</body>
+</html>
